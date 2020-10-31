@@ -303,6 +303,13 @@
       </sensor>
     </gazebo>
 
+<!--     <link name="base_link"/>
+
+    <joint name="base_torso_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <parent name="base_link"/>
+      <child name="torso_base"/>
+    </joint> -->
 
     <monokl name="monokl_l" parent="torso_base">
       <origin xyz="0 0.3 0.256" rpy="0 0 0" />
@@ -319,7 +326,7 @@
   </xacro:if>
 
   <velma_torso>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <!-- <origin xyz="0 0 0" rpy="0 0 0"/> -->
   </velma_torso>
 
   <kuka_lwr_arm parent="torso_link0" name="right" right="1">

@@ -4,7 +4,8 @@
                         xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
                         xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:macro name="velma_torso" params="*origin">
+  <!-- <xacro:macro name="velma_torso" params="*origin"> -->
+    <xacro:macro name="velma_torso">
 
     <xacro:macro name="wheel_inertia" params="m r h">
       <inertia ixx="${m*(3*r*r+h*h)/12}" ixy="0" ixz="0" iyy="${m*r*r/2}" iyz="0" izz="${m*(3*r*r+h*h)/12}" />
@@ -23,7 +24,8 @@
         <wheelSeparation>0.76</wheelSeparation>
         <wheelDiameter>0.2032</wheelDiameter>
 
-        <robotBaseFrame>torso_base</robotBaseFrame>
+        <!-- <robotBaseFrame>torso_base</robotBaseFrame> -->
+        <robotBaseFrame>base_link</robotBaseFrame>
         <commandTopic>/cmd_vel</commandTopic>
         <publishOdometryTf>true</publishOdometryTf>
 
@@ -48,6 +50,18 @@
         <useRealOdom>true</useRealOdom>
       </plugin>
     </gazebo>
+
+
+    <link name="base_link">
+      <origin xyz="-0.081 0 0.1225" rpy="0.0 0 0" />
+    </link>
+
+    <joint name="base_torso_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="torso_base"/>
+    </joint>
+
 <!--
     <joint name="torso_base_joint" type="planar">
       <origin xyz="0 0 0" rpy="0 0 0" />
@@ -80,7 +94,7 @@
         <origin xyz="0.01 0 0.1225" rpy="0.0 0 0" />
         <geometry>
           <box size="0.907 0.75 0.15" />
-          <!-- <mesh filename="package://omnivelma/meshes/collider/base.dae" /> -->
+          <mesh filename="package://omnivelma/meshes/collider/base.dae" />
         </geometry>
       </collision>
 
